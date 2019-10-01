@@ -62,10 +62,10 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-dropwizard" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-Binding" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="2019/09/28/dropwizard/" class="article-date">
-  <time datetime="2019-09-29T06:02:51.000Z" itemprop="datePublished">2019-09-28</time>
+    <a href="2019/09/30/Binding/" class="article-date">
+  <time datetime="2019-10-01T05:18:01.000Z" itemprop="datePublished">2019-09-30</time>
 </a>
     
   </div>
@@ -76,7 +76,67 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="2019/09/28/dropwizard/">Introduction to Dropwizard</a>
+      <a class="article-title" href="2019/09/30/Binding/">Dynamic Filter Binding</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="What-is-Dynamic-Filter-Binding"><a href="#What-is-Dynamic-Filter-Binding" class="headerlink" title="What is Dynamic Filter Binding?"></a>What is Dynamic Filter Binding?</h2><p>Bind filters to resource methods programmatically during the app initialization time.</p>
+<h2 id="Components"><a href="#Components" class="headerlink" title="Components"></a>Components</h2><ol>
+<li>Filter</li>
+<li>DynamicFeature</li>
+<li>Resource</li>
+</ol>
+<h3 id="Filter"><a href="#Filter" class="headerlink" title="Filter"></a>Filter</h3><ul>
+<li>implements ContainerRequestFilter, ContainerResponseFilter</li>
+<li>override filter method</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">LogFilter</span> <span class="keyword">implements</span> <span class="title">ContainerRequestFilter</span>, <span class="title">ContainerResponseFilter</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="meta">@Override</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">filter</span><span class="params">(ContainerRequestContext reqContext)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">      log(reqContext.getUriInfo(), reqContext.getHeaders());</span><br><span class="line"></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="meta">@Override</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">filter</span><span class="params">(ContainerRequestContext reqContext,</span></span></span><br><span class="line"><span class="function"><span class="params">                     ContainerResponseContext resContext)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">      log(reqContext.getUriInfo(), resContext.getHeaders());</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">log</span><span class="params">(UriInfo uriInfo, MultivaluedMap&lt;String, ?&gt; headers)</span> </span>&#123;</span><br><span class="line">      System.out.println(<span class="string">"Path: "</span> + uriInfo.getPath());</span><br><span class="line">      headers.entrySet().forEach(h -&gt; System.out.println(h.getKey() + <span class="string">": "</span> + h.getValue()));</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="DynamicFeature"><a href="#DynamicFeature" class="headerlink" title="DynamicFeature"></a>DynamicFeature</h3><ul>
+<li>@Provider</li>
+<li>implements DynamicFeature</li>
+<li>override configure to register filter (only works for path ‘/order’)</li>
+<li>bind filter with resource</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Provider</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FilterRegistrationFeature</span> <span class="keyword">implements</span> <span class="title">DynamicFeature</span> </span>&#123;</span><br><span class="line">  <span class="meta">@Override</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">configure</span><span class="params">(ResourceInfo resourceInfo, FeatureContext context)</span> </span>&#123;</span><br><span class="line">      <span class="keyword">if</span> (MyResource.class.isAssignableFrom(resourceInfo.getResourceClass())) &#123;</span><br><span class="line">          Method method = resourceInfo.getResourceMethod();</span><br><span class="line">          <span class="keyword">if</span> (method.getName().toLowerCase().contains(<span class="string">"order"</span>)) &#123;</span><br><span class="line">              context.register(<span class="keyword">new</span> LogFilter());</span><br><span class="line">          &#125;</span><br><span class="line">      &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Resource"><a href="#Resource" class="headerlink" title="Resource"></a>Resource</h3><p>Define path and verb.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Path</span>(<span class="string">""</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyResource</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="meta">@GET</span></span><br><span class="line">  <span class="meta">@Path</span>(<span class="string">"customers"</span>)</span><br><span class="line">  <span class="function"><span class="keyword">public</span> String <span class="title">getAllCustomers</span><span class="params">()</span> </span>&#123;</span><br><span class="line">      System.out.println(<span class="string">"in getAllCustomers()"</span>);</span><br><span class="line">      <span class="keyword">return</span> <span class="string">"dummy-response for all customers"</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="meta">@GET</span></span><br><span class="line">  <span class="meta">@Path</span>(<span class="string">"customers/&#123;id&#125;"</span>)</span><br><span class="line">  <span class="function"><span class="keyword">public</span> String <span class="title">getCustomerById</span><span class="params">(@PathParam(<span class="string">"id"</span>)</span> String id) </span>&#123;</span><br><span class="line">      System.out.println(<span class="string">"in getCustomerById()"</span>);</span><br><span class="line">      <span class="keyword">return</span> <span class="string">"dummy-response for customer "</span> + id;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="meta">@GET</span></span><br><span class="line">  <span class="meta">@Path</span>(<span class="string">"orders"</span>)</span><br><span class="line">  <span class="function"><span class="keyword">public</span> String <span class="title">getOrders</span><span class="params">()</span> </span>&#123;</span><br><span class="line">      System.out.println(<span class="string">"in getOrders()"</span>);</span><br><span class="line">      <span class="keyword">return</span> <span class="string">"dummy-response for orders"</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="References"><a href="#References" class="headerlink" title="References"></a>References</h2><p><a href="/2019/09/30/Binding//www.logicbig.com/tutorials/java-ee-tutorial/jax-rs/filters-dynamic-binding.html" target="_blank" rel="noopener">https://www.logicbig.com/tutorials/java-ee-tutorial/jax-rs/filters-dynamic-binding.html</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/09/30/Binding/" data-id="ck17e8v4j0001osxf9s6gizru" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-dropwizard" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="2019/09/30/dropwizard/" class="article-date">
+  <time datetime="2019-10-01T05:07:43.000Z" itemprop="datePublished">2019-09-30</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="2019/09/30/dropwizard/">Introduction to Dropwizard</a>
     </h1>
   
 
@@ -90,14 +150,14 @@
 <li>Configuration</li>
 <li>Representation</li>
 <li>Resource</li>
-<li>Health Check<br><img src="/2019/09/28/dropwizard/dropwizard.png" alt="Dropwizard"></li>
+<li>Health Check<br><img src="/2019/09/30/dropwizard/dropwizard.png" alt="Dropwizard"></li>
 </ol>
 <h3 id="Application"><a href="#Application" class="headerlink" title="Application"></a>Application</h3><p>(HelloWorldApplication.java): startup the app.</p>
 <p> 1, <code>static main</code> is app’s entry point.<br> 2, Register resource: in <code>run</code> method, 1,new resource instance 2,add to Jersey env.<br> 3, read configuration from <code>HelloWorldConfiguration</code></p>
  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.example.helloworld;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HelloWorldApplication</span> <span class="keyword">extends</span> <span class="title">Application</span>&lt;<span class="title">HelloWorldConfiguration</span>&gt; </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        <span class="keyword">new</span> HelloWorldApplication().run(args);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">initialize</span><span class="params">(Bootstrap&lt;HelloWorldConfiguration&gt; bootstrap)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// configure aspects of the application required before the application is run</span></span><br><span class="line">        <span class="comment">// like bundles, configuration source providers</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">(HelloWorldConfiguration configuration,</span></span></span><br><span class="line"><span class="function"><span class="params">                    Environment environment)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">final</span> HelloWorldResource resource = <span class="keyword">new</span> HelloWorldResource(</span><br><span class="line">            configuration.getTemplate(),</span><br><span class="line">            configuration.getDefaultName()</span><br><span class="line">        );</span><br><span class="line">        <span class="comment">// REGISTER RESOURCE</span></span><br><span class="line">        environment.jersey().register(resource);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 
-<h3 id="Configuration"><a href="#Configuration" class="headerlink" title="Configuration"></a>Configuration</h3><p>(HelloWorldConfiguration.java): environment configuration.<br>Parameters are specified in a <code>YAML</code> configuration file</p>
+<h3 id="Configuration"><a href="#Configuration" class="headerlink" title="Configuration"></a>Configuration</h3><p>(HelloWorldConfiguration.java): environment configuration.<br>Parameters are specified in a <code>YAML</code> configuration file.<br>Dropwizard parses the provided <code>YAML</code> configuration file and builds an instance of app configuration class by mapping YAML field names to object field names.</p>
 <h3 id="Representation"><a href="#Representation" class="headerlink" title="Representation"></a>Representation</h3><p>(Saying.java): API Data Structure.<br>Request content:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;id&quot;: 1,</span><br><span class="line">  &quot;content&quot;: &quot;Hi!&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
@@ -109,12 +169,18 @@
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.example.helloworld.resources;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Path</span>(<span class="string">"/hello-world"</span>)</span><br><span class="line"><span class="meta">@Produces</span>(MediaType.APPLICATION_JSON)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HelloWorldResource</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> String defaultName;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">HelloWorldResource</span><span class="params">(String defaultName)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.defaultName = defaultName;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@GET</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Saying <span class="title">sayHello</span><span class="params">(@QueryParam(<span class="string">"name"</span>)</span> Optional&lt;String&gt; name) </span>&#123;</span><br><span class="line">        <span class="keyword">final</span> String value = String.format(template, name.orElse(defaultName));</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> Saying(counter.incrementAndGet(), value);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <h3 id="Health-Check"><a href="#Health-Check" class="headerlink" title="Health Check"></a>Health Check</h3><p>(TemplateHealthCheck.java): runtime tests that show if the app still works.</p>
-<h2 id="References"><a href="#References" class="headerlink" title="References"></a>References</h2><p><a href="/2019/09/28/dropwizard//www.dropwizard.io/en/stable/getting-started.html" target="_blank" rel="noopener">http://www.dropwizard.io/en/stable/getting-started.html</a><br><a href="/2019/09/28/dropwizard//xebia.com/blog/dropwizard/" target="_blank" rel="noopener">https://xebia.com/blog/dropwizard/</a></p>
+<h2 id="Bootstrap"><a href="#Bootstrap" class="headerlink" title="Bootstrap"></a>Bootstrap</h2><p>Bootstrap is the the <strong>pre-start(temp)</strong> application environment, containing everything required to bootstrap a Dropwizard command.</p>
+<p>Before a Dropwizard application can provide the command-line interface, parse a configuration file, it must first go through a bootstrapping phase. </p>
+<p>This phase corresponds to <strong>initialize</strong> method. You can add Bundles, or register Jackson modules to include custom types as part of your configuration class.</p>
+<h2 id="Environments"><a href="#Environments" class="headerlink" title="Environments"></a>Environments</h2><p>A Dropwizard Environment consists of all the Resources, servlets, filters, Health Checks, Jersey providers, Managed Objects, Tasks, and Jersey properties.</p>
+<p>Application class <strong>run</strong> method: where to create new resource instances, etc., and adding them to the given Environment class</p>
+<p>Environment is a <strong>longer-lived object, holding Dropwizard’s Environment</strong> (not env. Such as dev or prod). It holds a similar, but somewhat different set of properties than the Bootsrap object.</p>
+<h2 id="References"><a href="#References" class="headerlink" title="References"></a>References</h2><p><a href="/2019/09/30/dropwizard//www.dropwizard.io/en/stable/getting-started.html" target="_blank" rel="noopener">http://www.dropwizard.io/en/stable/getting-started.html</a><br><a href="/2019/09/30/dropwizard//xebia.com/blog/dropwizard/" target="_blank" rel="noopener">https://xebia.com/blog/dropwizard/</a></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/09/28/dropwizard/" data-id="ck14kwn8v0000mcxfdm83epcf" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/09/30/dropwizard/" data-id="ck17e8v4c0000osxf8twrdwzf" class="article-share-link">Share</a>
       
       
     </footer>
@@ -127,7 +193,7 @@
     <article id="post-guice" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="2019/09/28/guice/" class="article-date">
-  <time datetime="2019-09-28T16:49:40.000Z" itemprop="datePublished">2019-09-28</time>
+  <time datetime="2019-09-29T06:24:27.000Z" itemprop="datePublished">2019-09-28</time>
 </a>
     
   </div>
@@ -151,7 +217,7 @@
 <h2 id="What-is-Guice"><a href="#What-is-Guice" class="headerlink" title="What is Guice"></a>What is Guice</h2><p>The best resource is always the official website.</p>
 <p>Think of Guice’s @Inject as the new new.<br>Guice can build the object graph.</p>
 <h3 id="Linked-Bindings"><a href="#Linked-Bindings" class="headerlink" title="Linked Bindings"></a>Linked Bindings</h3><p>Map a type to its implementation.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">public class BillingModule extends AbstractModule &#123;</span><br><span class="line">  @Override </span><br><span class="line">  protected void configure() &#123;</span><br><span class="line">    bind(TransactionLog.class).to(DatabaseTransactionLog.class);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BillingModule</span> <span class="keyword">extends</span> <span class="title">AbstractModule</span> </span>&#123;</span><br><span class="line">  <span class="meta">@Override</span> </span><br><span class="line">  <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">configure</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    bind(TransactionLog.class).to(DatabaseTransactionLog.class);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>When you call injector.getInstance(TransactionLog.class), or when the injector encounters a dependency on TransactionLog, it will use a DatabaseTransactionLog. </p>
 <h3 id="Provides-Methods"><a href="#Provides-Methods" class="headerlink" title="@Provides Methods"></a>@Provides Methods</h3><p>To create an object. Must be defined within a module.</p>
@@ -179,7 +245,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/09/28/guice/" data-id="ck14kwn900001mcxfbldut5g7" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/09/28/guice/" data-id="ck17e8v4n0002osxfhcs8okth" class="article-share-link">Share</a>
       
       
     </footer>
@@ -220,7 +286,11 @@
       <ul>
         
           <li>
-            <a href="2019/09/28/dropwizard/">Introduction to Dropwizard</a>
+            <a href="2019/09/30/Binding/">Dynamic Filter Binding</a>
+          </li>
+        
+          <li>
+            <a href="2019/09/30/dropwizard/">Introduction to Dropwizard</a>
           </li>
         
           <li>

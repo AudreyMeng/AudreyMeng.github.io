@@ -15,7 +15,7 @@
 <meta property="og:description" content="I hope to make this place my secret garden to track my technique growth.This is my first post. Simple notes about Google Guice.  What is GuiceThe best resource is always the official website. Think of">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="http://yoursite.com/2019/09/28/guice/guice.png">
-<meta property="og:updated_time" content="2019-09-28T16:49:40.000Z">
+<meta property="og:updated_time" content="2019-09-29T06:24:27.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Introduction to Guice">
 <meta name="twitter:description" content="I hope to make this place my secret garden to track my technique growth.This is my first post. Simple notes about Google Guice.  What is GuiceThe best resource is always the official website. Think of">
@@ -69,7 +69,7 @@
         <section id="main"><article id="post-guice" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="" class="article-date">
-  <time datetime="2019-09-28T16:49:40.000Z" itemprop="datePublished">2019-09-28</time>
+  <time datetime="2019-09-29T06:24:27.000Z" itemprop="datePublished">2019-09-28</time>
 </a>
     
   </div>
@@ -93,7 +93,7 @@
 <h2 id="What-is-Guice"><a href="#What-is-Guice" class="headerlink" title="What is Guice"></a>What is Guice</h2><p>The best resource is always the official website.</p>
 <p>Think of Guice’s @Inject as the new new.<br>Guice can build the object graph.</p>
 <h3 id="Linked-Bindings"><a href="#Linked-Bindings" class="headerlink" title="Linked Bindings"></a>Linked Bindings</h3><p>Map a type to its implementation.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">public class BillingModule extends AbstractModule &#123;</span><br><span class="line">  @Override </span><br><span class="line">  protected void configure() &#123;</span><br><span class="line">    bind(TransactionLog.class).to(DatabaseTransactionLog.class);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BillingModule</span> <span class="keyword">extends</span> <span class="title">AbstractModule</span> </span>&#123;</span><br><span class="line">  <span class="meta">@Override</span> </span><br><span class="line">  <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">configure</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    bind(TransactionLog.class).to(DatabaseTransactionLog.class);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>When you call injector.getInstance(TransactionLog.class), or when the injector encounters a dependency on TransactionLog, it will use a DatabaseTransactionLog. </p>
 <h3 id="Provides-Methods"><a href="#Provides-Methods" class="headerlink" title="@Provides Methods"></a>@Provides Methods</h3><p>To create an object. Must be defined within a module.</p>
@@ -121,7 +121,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/09/28/guice/" data-id="ck14kwn900001mcxfbldut5g7" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/09/28/guice/" data-id="ck17e8v4n0002osxfhcs8okth" class="article-share-link">Share</a>
       
       
     </footer>
@@ -130,7 +130,7 @@
     
 <nav id="article-nav">
   
-    <a href="../dropwizard/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="../../30/dropwizard/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Newer</strong>
       <div class="article-nav-title">
         
@@ -174,7 +174,11 @@
       <ul>
         
           <li>
-            <a href="../dropwizard/">Introduction to Dropwizard</a>
+            <a href="../../30/Binding/">Dynamic Filter Binding</a>
+          </li>
+        
+          <li>
+            <a href="../../30/dropwizard/">Introduction to Dropwizard</a>
           </li>
         
           <li>

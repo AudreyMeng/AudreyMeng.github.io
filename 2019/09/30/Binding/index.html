@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>Dynamic Filter Binding | Audrey&#39;s Secret Garden</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="What is Dynamic Filter Binding?Bind filters to resource methods programmatically during the app initialization time. Components Filter DynamicFeature Resource  Filter implements ContainerRequestFilter">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Dynamic Filter Binding">
+<meta property="og:url" content="http://yoursite.com/2019/09/30/Binding/index.html">
+<meta property="og:site_name" content="Audrey&#39;s Secret Garden">
+<meta property="og:description" content="What is Dynamic Filter Binding?Bind filters to resource methods programmatically during the app initialization time. Components Filter DynamicFeature Resource  Filter implements ContainerRequestFilter">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2019-10-01T05:18:01.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Dynamic Filter Binding">
+<meta name="twitter:description" content="What is Dynamic Filter Binding?Bind filters to resource methods programmatically during the app initialization time. Components Filter DynamicFeature Resource  Filter implements ContainerRequestFilter">
+  
+    <link rel="alternate" href="../../../../atom.xml" title="Audrey&#39;s Secret Garden" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="../../../../css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="../../../../index.html" id="logo">Audrey&#39;s Secret Garden</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="../../../../index.html">Home</a>
+        
+          <a class="main-nav-link" href="../../../../archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="../../../../atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-Binding" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="" class="article-date">
+  <time datetime="2019-10-01T05:18:01.000Z" itemprop="datePublished">2019-09-30</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Dynamic Filter Binding
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="What-is-Dynamic-Filter-Binding"><a href="#What-is-Dynamic-Filter-Binding" class="headerlink" title="What is Dynamic Filter Binding?"></a>What is Dynamic Filter Binding?</h2><p>Bind filters to resource methods programmatically during the app initialization time.</p>
+<h2 id="Components"><a href="#Components" class="headerlink" title="Components"></a>Components</h2><ol>
+<li>Filter</li>
+<li>DynamicFeature</li>
+<li>Resource</li>
+</ol>
+<h3 id="Filter"><a href="#Filter" class="headerlink" title="Filter"></a>Filter</h3><ul>
+<li>implements ContainerRequestFilter, ContainerResponseFilter</li>
+<li>override filter method</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">LogFilter</span> <span class="keyword">implements</span> <span class="title">ContainerRequestFilter</span>, <span class="title">ContainerResponseFilter</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="meta">@Override</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">filter</span><span class="params">(ContainerRequestContext reqContext)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">      log(reqContext.getUriInfo(), reqContext.getHeaders());</span><br><span class="line"></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="meta">@Override</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">filter</span><span class="params">(ContainerRequestContext reqContext,</span></span></span><br><span class="line"><span class="function"><span class="params">                     ContainerResponseContext resContext)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">      log(reqContext.getUriInfo(), resContext.getHeaders());</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">log</span><span class="params">(UriInfo uriInfo, MultivaluedMap&lt;String, ?&gt; headers)</span> </span>&#123;</span><br><span class="line">      System.out.println(<span class="string">"Path: "</span> + uriInfo.getPath());</span><br><span class="line">      headers.entrySet().forEach(h -&gt; System.out.println(h.getKey() + <span class="string">": "</span> + h.getValue()));</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="DynamicFeature"><a href="#DynamicFeature" class="headerlink" title="DynamicFeature"></a>DynamicFeature</h3><ul>
+<li>@Provider</li>
+<li>implements DynamicFeature</li>
+<li>override configure to register filter (only works for path ‘/order’)</li>
+<li>bind filter with resource</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Provider</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FilterRegistrationFeature</span> <span class="keyword">implements</span> <span class="title">DynamicFeature</span> </span>&#123;</span><br><span class="line">  <span class="meta">@Override</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">configure</span><span class="params">(ResourceInfo resourceInfo, FeatureContext context)</span> </span>&#123;</span><br><span class="line">      <span class="keyword">if</span> (MyResource.class.isAssignableFrom(resourceInfo.getResourceClass())) &#123;</span><br><span class="line">          Method method = resourceInfo.getResourceMethod();</span><br><span class="line">          <span class="keyword">if</span> (method.getName().toLowerCase().contains(<span class="string">"order"</span>)) &#123;</span><br><span class="line">              context.register(<span class="keyword">new</span> LogFilter());</span><br><span class="line">          &#125;</span><br><span class="line">      &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Resource"><a href="#Resource" class="headerlink" title="Resource"></a>Resource</h3><p>Define path and verb.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Path</span>(<span class="string">""</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyResource</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="meta">@GET</span></span><br><span class="line">  <span class="meta">@Path</span>(<span class="string">"customers"</span>)</span><br><span class="line">  <span class="function"><span class="keyword">public</span> String <span class="title">getAllCustomers</span><span class="params">()</span> </span>&#123;</span><br><span class="line">      System.out.println(<span class="string">"in getAllCustomers()"</span>);</span><br><span class="line">      <span class="keyword">return</span> <span class="string">"dummy-response for all customers"</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="meta">@GET</span></span><br><span class="line">  <span class="meta">@Path</span>(<span class="string">"customers/&#123;id&#125;"</span>)</span><br><span class="line">  <span class="function"><span class="keyword">public</span> String <span class="title">getCustomerById</span><span class="params">(@PathParam(<span class="string">"id"</span>)</span> String id) </span>&#123;</span><br><span class="line">      System.out.println(<span class="string">"in getCustomerById()"</span>);</span><br><span class="line">      <span class="keyword">return</span> <span class="string">"dummy-response for customer "</span> + id;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="meta">@GET</span></span><br><span class="line">  <span class="meta">@Path</span>(<span class="string">"orders"</span>)</span><br><span class="line">  <span class="function"><span class="keyword">public</span> String <span class="title">getOrders</span><span class="params">()</span> </span>&#123;</span><br><span class="line">      System.out.println(<span class="string">"in getOrders()"</span>);</span><br><span class="line">      <span class="keyword">return</span> <span class="string">"dummy-response for orders"</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="References"><a href="#References" class="headerlink" title="References"></a>References</h2><p><a href="/2019/09/30/Binding//www.logicbig.com/tutorials/java-ee-tutorial/jax-rs/filters-dynamic-binding.html" target="_blank" rel="noopener">https://www.logicbig.com/tutorials/java-ee-tutorial/jax-rs/filters-dynamic-binding.html</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/09/30/Binding/" data-id="ck17e8v4j0001osxf9s6gizru" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="../dropwizard/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Introduction to Dropwizard</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="../../../../archives/2019/09/">September 2019</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="">Dynamic Filter Binding</a>
+          </li>
+        
+          <li>
+            <a href="../dropwizard/">Introduction to Dropwizard</a>
+          </li>
+        
+          <li>
+            <a href="../../28/guice/">Introduction to Guice</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 Audrey Meng<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="../../../../index.html" class="mobile-nav-link">Home</a>
+  
+    <a href="../../../../archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="../../../../fancybox/jquery.fancybox.css">
+  <script src="../../../../fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="../../../../js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>
