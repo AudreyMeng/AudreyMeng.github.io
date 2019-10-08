@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>State Pattern | Audrey&#39;s Secret Garden</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="This is an introduction to state pattern. What is State PatternAllows an object to alter its behavior when its internal state changes. Key Points An object has multiple states. State is a interface wi">
+<meta property="og:type" content="article">
+<meta property="og:title" content="State Pattern">
+<meta property="og:url" content="http://yoursite.com/2019/10/07/StatePattern/index.html">
+<meta property="og:site_name" content="Audrey&#39;s Secret Garden">
+<meta property="og:description" content="This is an introduction to state pattern. What is State PatternAllows an object to alter its behavior when its internal state changes. Key Points An object has multiple states. State is a interface wi">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2019-10-08T05:13:09.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="State Pattern">
+<meta name="twitter:description" content="This is an introduction to state pattern. What is State PatternAllows an object to alter its behavior when its internal state changes. Key Points An object has multiple states. State is a interface wi">
+  
+    <link rel="alternate" href="../../../../atom.xml" title="Audrey&#39;s Secret Garden" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="../../../../css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="../../../../index.html" id="logo">Audrey&#39;s Secret Garden</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="../../../../index.html">Home</a>
+        
+          <a class="main-nav-link" href="../../../../archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="../../../../atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-StatePattern" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="" class="article-date">
+  <time datetime="2019-10-08T05:13:09.000Z" itemprop="datePublished">2019-10-07</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      State Pattern
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>This is an introduction to state pattern.</p>
+<h2 id="What-is-State-Pattern"><a href="#What-is-State-Pattern" class="headerlink" title="What is State Pattern"></a>What is State Pattern</h2><p>Allows an object to alter its behavior when its internal state changes.</p>
+<h3 id="Key-Points"><a href="#Key-Points" class="headerlink" title="Key Points"></a>Key Points</h3><ol>
+<li>An object has multiple <strong>states</strong>.</li>
+<li>State is a <strong>interface</strong> with some methods.</li>
+<li>Each specific state implements <strong>all method behaviors</strong>, includes state shifting.</li>
+<li>The object class will hold instance variables for <strong>all state types</strong> and a <strong>State</strong> type variable.</li>
+<li><strong>Shared</strong> methods like setState or variables shared by all state are still in object class.<ul>
+<li>Each state class use object instance to access shared methods/variables.</li>
+</ul>
+</li>
+</ol>
+<h2 id="Gumball-Machine-Example"><a href="#Gumball-Machine-Example" class="headerlink" title="Gumball Machine Example"></a>Gumball Machine Example</h2><p>Gumball machine has multiple states, all states has <strong>same</strong> methods(insertCoin, ejectCoin,<br>dispenseCoin…) but with <strong>different</strong> behaviors.</p>
+<p>State Pattern Solution:</p>
+<ul>
+<li>Define State interface to hold all diverse behaviors,</li>
+<li>GumballMachine class <ul>
+<li>holds instance variable for all state class types and one State variable,</li>
+<li>setState and gumball number variable/getGumballNumber are all in this class,</li>
+</ul>
+</li>
+<li>Implement each state class<ul>
+<li>state changes also happens inside these class,</li>
+<li><strong>GumballMachine instance is passed in to give us access to shared methods/variables</strong>.</li>
+</ul>
+</li>
+</ul>
+<h2 id="My-Code-Example"><a href="#My-Code-Example" class="headerlink" title="My Code Example"></a>My Code Example</h2><p><a href="/2019/10/07/StatePattern//github.com/AudreyMeng/Java/tree/master/StatePattern" target="_blank" rel="noopener">https://github.com/AudreyMeng/Java/tree/master/StatePattern</a></p>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><p><em>Head First Design Pattern</em></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/10/07/StatePattern/" data-id="ck1he32mu0000nbxfx096zrs7" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="../StrategyPattern/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Strategy Pattern</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="../../../../archives/2019/10/">October 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../../../archives/2019/09/">September 2019</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="">State Pattern</a>
+          </li>
+        
+          <li>
+            <a href="../StrategyPattern/">Strategy Pattern</a>
+          </li>
+        
+          <li>
+            <a href="../../../09/30/Binding/">Dynamic Filter Binding</a>
+          </li>
+        
+          <li>
+            <a href="../../../09/30/dropwizard/">Introduction to Dropwizard</a>
+          </li>
+        
+          <li>
+            <a href="../../../09/28/guice/">Introduction to Guice</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 Audrey Meng<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="../../../../index.html" class="mobile-nav-link">Home</a>
+  
+    <a href="../../../../archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="../../../../fancybox/jquery.fancybox.css">
+  <script src="../../../../fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="../../../../js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

@@ -5,23 +5,23 @@
   
 
   
-  <title>StrategyPattern | Audrey&#39;s Secret Garden</title>
+  <title>Strategy Pattern | Audrey&#39;s Secret Garden</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="This is an introduction to Strategy Design Pattern. What is Strategy Design PatternConceptdefines a family of algorithms,encapsulates each one, and makes them interchangeable.Strategy lets the algorit">
 <meta property="og:type" content="article">
-<meta property="og:title" content="StrategyPattern">
-<meta property="og:url" content="http://yoursite.com/2019/10/05/StrategyPattern/index.html">
+<meta property="og:title" content="Strategy Pattern">
+<meta property="og:url" content="http://yoursite.com/2019/10/07/StrategyPattern/index.html">
 <meta property="og:site_name" content="Audrey&#39;s Secret Garden">
 <meta property="og:description" content="This is an introduction to Strategy Design Pattern. What is Strategy Design PatternConceptdefines a family of algorithms,encapsulates each one, and makes them interchangeable.Strategy lets the algorit">
 <meta property="og:locale" content="en">
-<meta property="og:image" content="http://yoursite.com/2019/10/05/StrategyPattern/inheritance.png">
-<meta property="og:image" content="http://yoursite.com/2019/10/05/StrategyPattern/interface.png">
-<meta property="og:image" content="http://yoursite.com/2019/10/05/StrategyPattern/duck.png">
-<meta property="og:updated_time" content="2019-10-06T01:29:55.000Z">
+<meta property="og:image" content="http://yoursite.com/2019/10/07/StrategyPattern/inheritance.png">
+<meta property="og:image" content="http://yoursite.com/2019/10/07/StrategyPattern/interface.png">
+<meta property="og:image" content="http://yoursite.com/2019/10/07/StrategyPattern/duck.png">
+<meta property="og:updated_time" content="2019-10-08T04:51:49.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="StrategyPattern">
+<meta name="twitter:title" content="Strategy Pattern">
 <meta name="twitter:description" content="This is an introduction to Strategy Design Pattern. What is Strategy Design PatternConceptdefines a family of algorithms,encapsulates each one, and makes them interchangeable.Strategy lets the algorit">
-<meta name="twitter:image" content="http://yoursite.com/2019/10/05/StrategyPattern/inheritance.png">
+<meta name="twitter:image" content="http://yoursite.com/2019/10/07/StrategyPattern/inheritance.png">
   
     <link rel="alternate" href="../../../../atom.xml" title="Audrey&#39;s Secret Garden" type="application/atom+xml">
   
@@ -71,7 +71,7 @@
         <section id="main"><article id="post-StrategyPattern" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="" class="article-date">
-  <time datetime="2019-10-06T01:29:55.000Z" itemprop="datePublished">2019-10-05</time>
+  <time datetime="2019-10-08T04:51:49.000Z" itemprop="datePublished">2019-10-07</time>
 </a>
     
   </div>
@@ -82,7 +82,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      StrategyPattern
+      Strategy Pattern
     </h1>
   
 
@@ -108,16 +108,16 @@
 <p>The first 2 kinds of behaviors are easy to handle:<br>   shared swim: implement in base class<br>   varied display: implement in each child class type.</p>
 <p>The key is to design the 3rd kind of behavior.</p>
 <p>Here is 3 different kinds of design:</p>
-<h3 id="inheritance"><a href="#inheritance" class="headerlink" title="inheritance"></a>inheritance</h3><p>Implement fly/quack in base class as pic below, then all children type shares same behaviors. <strong>Not working</strong>!<br>Implement fly/quack in each child class, it works, but lots of <strong>duplicate</strong> code.<br><img src="/2019/10/05/StrategyPattern/inheritance.png" alt="Inheritance Duck"></p>
-<h3 id="interface"><a href="#interface" class="headerlink" title="interface"></a>interface</h3><p>All child classes have to override fly/quack interface, <strong>tons of duplicate work</strong>.<br><img src="/2019/10/05/StrategyPattern/interface.png" alt="Interface Duck"></p>
-<h3 id="strategy-pattern"><a href="#strategy-pattern" class="headerlink" title="strategy pattern"></a>strategy pattern</h3><p>Perfect way so far!<br>keep shared behaviors to <strong>reduce code</strong> work.<br>Instance variables from interfaces enables us to <strong>encapsulate</strong> just a couple of fly/quack behaviors to apply on all child classes.<br>Moreover, dynamic set methods in base class enable us <strong>dynamically</strong> change fly/quack behaviors.<br><img src="/2019/10/05/StrategyPattern/duck.png" alt="Strategy Pattern Duck"></p>
-<h2 id="My-Code-Example"><a href="#My-Code-Example" class="headerlink" title="My Code Example"></a>My Code Example</h2><p><a href="/2019/10/05/StrategyPattern//github.com/AudreyMeng/Java/tree/master/StrategyPattern" target="_blank" rel="noopener">https://github.com/AudreyMeng/Java/tree/master/StrategyPattern</a></p>
+<h3 id="inheritance"><a href="#inheritance" class="headerlink" title="inheritance"></a>inheritance</h3><p>Implement fly/quack in base class as pic below, then all children type shares same behaviors. <strong>Not working</strong>!<br>Implement fly/quack in each child class, it works, but lots of <strong>duplicate</strong> code.<br><img src="/2019/10/07/StrategyPattern/inheritance.png" alt="Inheritance Duck"></p>
+<h3 id="interface"><a href="#interface" class="headerlink" title="interface"></a>interface</h3><p>All child classes have to override fly/quack interface, <strong>tons of duplicate work</strong>.<br><img src="/2019/10/07/StrategyPattern/interface.png" alt="Interface Duck"></p>
+<h3 id="strategy-pattern"><a href="#strategy-pattern" class="headerlink" title="strategy pattern"></a>strategy pattern</h3><p>Perfect way so far!<br>keep shared behaviors to <strong>reduce code</strong> work.<br>Instance variables from interfaces enables us to <strong>encapsulate</strong> just a couple of fly/quack behaviors to apply on all child classes.<br>Moreover, dynamic set methods in base class enable us <strong>dynamically</strong> change fly/quack behaviors.<br><img src="/2019/10/07/StrategyPattern/duck.png" alt="Strategy Pattern Duck"></p>
+<h2 id="My-Code-Example"><a href="#My-Code-Example" class="headerlink" title="My Code Example"></a>My Code Example</h2><p><a href="/2019/10/07/StrategyPattern//github.com/AudreyMeng/Java/tree/master/StrategyPattern" target="_blank" rel="noopener">https://github.com/AudreyMeng/Java/tree/master/StrategyPattern</a></p>
 <h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><p><em>Head First Design Pattern</em></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/10/05/StrategyPattern/" data-id="ck1eb982h0000ucxfmn4zi2ux" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/10/07/StrategyPattern/" data-id="ck1he32mz0001nbxfg0f9vgid" class="article-share-link">Share</a>
       
       
     </footer>
@@ -125,6 +125,15 @@
   
     
 <nav id="article-nav">
+  
+    <a href="../StatePattern/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          State Pattern
+        
+      </div>
+    </a>
   
   
     <a href="../../../09/30/Binding/" id="article-nav-older" class="article-nav-link-wrap">
@@ -166,7 +175,11 @@
       <ul>
         
           <li>
-            <a href="">StrategyPattern</a>
+            <a href="../StatePattern/">State Pattern</a>
+          </li>
+        
+          <li>
+            <a href="">Strategy Pattern</a>
           </li>
         
           <li>

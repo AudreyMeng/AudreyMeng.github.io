@@ -62,10 +62,10 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-StrategyPattern" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-StatePattern" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="2019/10/05/StrategyPattern/" class="article-date">
-  <time datetime="2019-10-06T01:29:55.000Z" itemprop="datePublished">2019-10-05</time>
+    <a href="2019/10/07/StatePattern/" class="article-date">
+  <time datetime="2019-10-08T05:13:09.000Z" itemprop="datePublished">2019-10-07</time>
 </a>
     
   </div>
@@ -76,7 +76,72 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="2019/10/05/StrategyPattern/">StrategyPattern</a>
+      <a class="article-title" href="2019/10/07/StatePattern/">State Pattern</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>This is an introduction to state pattern.</p>
+<h2 id="What-is-State-Pattern"><a href="#What-is-State-Pattern" class="headerlink" title="What is State Pattern"></a>What is State Pattern</h2><p>Allows an object to alter its behavior when its internal state changes.</p>
+<h3 id="Key-Points"><a href="#Key-Points" class="headerlink" title="Key Points"></a>Key Points</h3><ol>
+<li>An object has multiple <strong>states</strong>.</li>
+<li>State is a <strong>interface</strong> with some methods.</li>
+<li>Each specific state implements <strong>all method behaviors</strong>, includes state shifting.</li>
+<li>The object class will hold instance variables for <strong>all state types</strong> and a <strong>State</strong> type variable.</li>
+<li><strong>Shared</strong> methods like setState or variables shared by all state are still in object class.<ul>
+<li>Each state class use object instance to access shared methods/variables.</li>
+</ul>
+</li>
+</ol>
+<h2 id="Gumball-Machine-Example"><a href="#Gumball-Machine-Example" class="headerlink" title="Gumball Machine Example"></a>Gumball Machine Example</h2><p>Gumball machine has multiple states, all states has <strong>same</strong> methods(insertCoin, ejectCoin,<br>dispenseCoin…) but with <strong>different</strong> behaviors.</p>
+<p>State Pattern Solution:</p>
+<ul>
+<li>Define State interface to hold all diverse behaviors,</li>
+<li>GumballMachine class <ul>
+<li>holds instance variable for all state class types and one State variable,</li>
+<li>setState and gumball number variable/getGumballNumber are all in this class,</li>
+</ul>
+</li>
+<li>Implement each state class<ul>
+<li>state changes also happens inside these class,</li>
+<li><strong>GumballMachine instance is passed in to give us access to shared methods/variables</strong>.</li>
+</ul>
+</li>
+</ul>
+<h2 id="My-Code-Example"><a href="#My-Code-Example" class="headerlink" title="My Code Example"></a>My Code Example</h2><p><a href="/2019/10/07/StatePattern//github.com/AudreyMeng/Java/tree/master/StatePattern" target="_blank" rel="noopener">https://github.com/AudreyMeng/Java/tree/master/StatePattern</a></p>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><p><em>Head First Design Pattern</em></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/10/07/StatePattern/" data-id="ck1he32mu0000nbxfx096zrs7" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-StrategyPattern" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="2019/10/07/StrategyPattern/" class="article-date">
+  <time datetime="2019-10-08T04:51:49.000Z" itemprop="datePublished">2019-10-07</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="2019/10/07/StrategyPattern/">Strategy Pattern</a>
     </h1>
   
 
@@ -102,16 +167,16 @@
 <p>The first 2 kinds of behaviors are easy to handle:<br>   shared swim: implement in base class<br>   varied display: implement in each child class type.</p>
 <p>The key is to design the 3rd kind of behavior.</p>
 <p>Here is 3 different kinds of design:</p>
-<h3 id="inheritance"><a href="#inheritance" class="headerlink" title="inheritance"></a>inheritance</h3><p>Implement fly/quack in base class as pic below, then all children type shares same behaviors. <strong>Not working</strong>!<br>Implement fly/quack in each child class, it works, but lots of <strong>duplicate</strong> code.<br><img src="/2019/10/05/StrategyPattern/inheritance.png" alt="Inheritance Duck"></p>
-<h3 id="interface"><a href="#interface" class="headerlink" title="interface"></a>interface</h3><p>All child classes have to override fly/quack interface, <strong>tons of duplicate work</strong>.<br><img src="/2019/10/05/StrategyPattern/interface.png" alt="Interface Duck"></p>
-<h3 id="strategy-pattern"><a href="#strategy-pattern" class="headerlink" title="strategy pattern"></a>strategy pattern</h3><p>Perfect way so far!<br>keep shared behaviors to <strong>reduce code</strong> work.<br>Instance variables from interfaces enables us to <strong>encapsulate</strong> just a couple of fly/quack behaviors to apply on all child classes.<br>Moreover, dynamic set methods in base class enable us <strong>dynamically</strong> change fly/quack behaviors.<br><img src="/2019/10/05/StrategyPattern/duck.png" alt="Strategy Pattern Duck"></p>
-<h2 id="My-Code-Example"><a href="#My-Code-Example" class="headerlink" title="My Code Example"></a>My Code Example</h2><p><a href="/2019/10/05/StrategyPattern//github.com/AudreyMeng/Java/tree/master/StrategyPattern" target="_blank" rel="noopener">https://github.com/AudreyMeng/Java/tree/master/StrategyPattern</a></p>
+<h3 id="inheritance"><a href="#inheritance" class="headerlink" title="inheritance"></a>inheritance</h3><p>Implement fly/quack in base class as pic below, then all children type shares same behaviors. <strong>Not working</strong>!<br>Implement fly/quack in each child class, it works, but lots of <strong>duplicate</strong> code.<br><img src="/2019/10/07/StrategyPattern/inheritance.png" alt="Inheritance Duck"></p>
+<h3 id="interface"><a href="#interface" class="headerlink" title="interface"></a>interface</h3><p>All child classes have to override fly/quack interface, <strong>tons of duplicate work</strong>.<br><img src="/2019/10/07/StrategyPattern/interface.png" alt="Interface Duck"></p>
+<h3 id="strategy-pattern"><a href="#strategy-pattern" class="headerlink" title="strategy pattern"></a>strategy pattern</h3><p>Perfect way so far!<br>keep shared behaviors to <strong>reduce code</strong> work.<br>Instance variables from interfaces enables us to <strong>encapsulate</strong> just a couple of fly/quack behaviors to apply on all child classes.<br>Moreover, dynamic set methods in base class enable us <strong>dynamically</strong> change fly/quack behaviors.<br><img src="/2019/10/07/StrategyPattern/duck.png" alt="Strategy Pattern Duck"></p>
+<h2 id="My-Code-Example"><a href="#My-Code-Example" class="headerlink" title="My Code Example"></a>My Code Example</h2><p><a href="/2019/10/07/StrategyPattern//github.com/AudreyMeng/Java/tree/master/StrategyPattern" target="_blank" rel="noopener">https://github.com/AudreyMeng/Java/tree/master/StrategyPattern</a></p>
 <h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><p><em>Head First Design Pattern</em></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/10/05/StrategyPattern/" data-id="ck1eb982h0000ucxfmn4zi2ux" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/10/07/StrategyPattern/" data-id="ck1he32mz0001nbxfg0f9vgid" class="article-share-link">Share</a>
       
       
     </footer>
@@ -171,7 +236,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/09/30/Binding/" data-id="ck1eb982n0001ucxfxlk8xmhv" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/09/30/Binding/" data-id="ck1he32n50003nbxf2elj05xg" class="article-share-link">Share</a>
       
       
     </footer>
@@ -239,7 +304,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/09/30/dropwizard/" data-id="ck1eb982t0003ucxfylgcm524" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/09/30/dropwizard/" data-id="ck1he32n20002nbxf2mx3ef6f" class="article-share-link">Share</a>
       
       
     </footer>
@@ -304,7 +369,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/09/28/guice/" data-id="ck1eb982p0002ucxff80v50y1" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/09/28/guice/" data-id="ck1he32n90004nbxfi282fqd4" class="article-share-link">Share</a>
       
       
     </footer>
@@ -345,7 +410,11 @@
       <ul>
         
           <li>
-            <a href="2019/10/05/StrategyPattern/">StrategyPattern</a>
+            <a href="2019/10/07/StatePattern/">State Pattern</a>
+          </li>
+        
+          <li>
+            <a href="2019/10/07/StrategyPattern/">Strategy Pattern</a>
           </li>
         
           <li>
